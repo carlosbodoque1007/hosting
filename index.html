@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Prueba</title>
+
+	<style>
+		body{text-align:center;}
+	</style>
+</head>
+
+<body>
+	<div id="Ingresar">
+		<h1>Ingresar Estado</h1>
+		<h4>"encender" o "apagar"</h4>
+		<input id="ingresaEstado" type="text">
+		
+		
+		<button id="mandar">Mandar</button>
+		
+		
+	</div>
+	
+	
+	<script type="module">
+	// Import the functions you need from the SDKs you need
+	  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
+	  // TODO: Add SDKs for Firebase products that you want to use
+	  // https://firebase.google.com/docs/web/setup#available-libraries
+
+	  // Your web app's Firebase configuration
+	  const firebaseConfig = {
+  apiKey: "AIzaSyAdMf5xCYv1vpUR_d0JK1M-VgStrNB2HiU",
+  authDomain: "iot-cd6b8.firebaseapp.com",
+  databaseURL: "https://iot-cd6b8-default-rtdb.firebaseio.com",
+  projectId: "iot-cd6b8",
+  storageBucket: "iot-cd6b8.appspot.com",
+  messagingSenderId: "1076292797738",
+  appId: "1:1076292797738:web:1ec6b8185a7a6abbb28a53",
+  measurementId: "G-S6W7G49JLX"
+};
+
+	  // Initialize Firebase
+	  const app = initializeApp(firebaseConfig);
+	  
+	  import {getDatabase,set,get,update,remove,ref,child}
+	  from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js"
+	  
+	  const db=getDatabase();
+	  
+	  var ingresaEstado=document.querySelector("#ingresaEstado");
+	  var botonAgregar=document.querySelector("#mandar");
+	  const estadoActualElement = document.querySelector("#estadoActual");
+	  
+	  
+	  function AgregarDatos(){
+		set(ref(db, "Led/"),{
+                Estado: ingresaEstado.value,
+                
+            })
+            .then(()=>{
+                alert("Dato enviado");
+            })
+            .catch((error)=>{
+                alert(error);
+            });
+
+	       }
+	  
+	  
+	  
+	  botonAgregar.addEventListener("click",AgregarDatos);
+	  
+	  
+	</script>
+	
+</body>
+</html>
